@@ -14,15 +14,6 @@ model = WhisperModel(model_size, device="cpu", compute_type="int8")
 print(f"Model loaded in {perf_counter() - t0:.2f}s")
 t_transcribe = perf_counter()
 
-REPLACEMENTS = {
-    "caralho": "Carol",
-    "cara": "Carol",
-}
-
-def apply_replacements(text):
-    # for wrong, correct in REPLACEMENTS.items():
-    #     text = text.replace(wrong, correct)
-    return text
 
 lines = []
 
@@ -37,7 +28,7 @@ for p in sorted(DATA_PATH.iterdir()):
     lines.append(f"*Language: {info.language} ({info.language_probability:.2f})*\n\n")
 
     for segment in segments:
-        line = "[%.2fs -> %.2fs] %s" % (segment.start, segment.end, apply_replacements(segment.text))
+        line = "[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text)
         print(line)
         lines.append(line + "\n")
 
