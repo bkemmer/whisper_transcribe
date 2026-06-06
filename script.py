@@ -22,7 +22,7 @@ for p in sorted(DATA_PATH.iterdir()):
     t_iter = perf_counter()
     segments, info = model.transcribe(audio=str(p), language='pt', beam_size=5)
 
-    print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
+    # print("Detected language '%s' with probability %f" % (info.language, info.language_probability))
 
     lines.append(f"## {p.name}\n")
     lines.append(f"*Language: {info.language} ({info.language_probability:.2f})*\n\n")
